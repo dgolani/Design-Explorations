@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0F0F11">
+<title>PLP Redesign · Curated For You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Nunito+Sans:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Nunito Sans', -apple-system, system-ui, sans-serif;
+    --bg: #0F0F11;
+    --surface: #16161A;
+    --surface2: #1E1E22;
+    --border: #2A2A2F;
+    --border-soft: #1F1F24;
+    --ink: #F5F3EF;
+    --ink2: #D1CEC8;
+    --stone: #8F8B84;
+    --bronze: #C49373;
+    --accent: #C49373;
+  }
+  body.light {
+    --bg: #FAF8F4;
+    --surface: #FFFFFF;
+    --surface2: #F6F3EF;
+    --border: #E4E0D9;
+    --border-soft: #EDEAE4;
+    --ink: #1A1A1A;
+    --ink2: #3A3A38;
+    --stone: #7B7670;
+    --bronze: #9C6B48;
+    --accent: #9C6B48;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { min-height: 100%; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 56px 20px 64px;
+    padding-top: max(56px, calc(32px + env(safe-area-inset-top)));
+  }
+
+  .top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+    margin-bottom: 40px;
+  }
+  .top .kicker {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    color: var(--bronze); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .top h1 {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(32px, 7vw, 52px);
+    letter-spacing: -0.02em; color: var(--ink);
+    line-height: 1.05;
+  }
+  .top p {
+    font-size: 13px; line-height: 1.6; color: var(--stone);
+    margin-top: 14px; max-width: 540px;
+  }
+
+  .mode-toggle {
+    display: inline-flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 3px;
+    flex-shrink: 0;
+  }
+  .mode-toggle button {
+    padding: 5px 12px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+    text-transform: uppercase;
+    background: transparent;
+    border: 0; border-radius: 13px;
+    color: var(--stone);
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .mode-toggle button.on { background: var(--ink); color: var(--bg); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--border); }
+  .card:active { transform: translateY(0); }
+
+  .card .preview {
+    aspect-ratio: 9/16;
+    position: relative;
+    background: var(--surface2);
+    overflow: hidden;
+  }
+  .card .preview svg { width: 100%; height: 100%; display: block; }
+
+  .card .body {
+    padding: 18px 18px 20px;
+  }
+  .card .num {
+    font-size: 10px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--bronze); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .card h3 {
+    font-family: var(--serif); font-weight: 300;
+    font-size: 22px; letter-spacing: -0.01em;
+    color: var(--ink); line-height: 1.15;
+    margin-bottom: 8px;
+  }
+  .card p {
+    font-size: 12px; line-height: 1.55; color: var(--stone);
+    min-height: 54px;
+  }
+  .card .cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    color: var(--ink); text-transform: uppercase;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .card .cta .arrow {
+    transition: transform 0.2s ease;
+  }
+  .card:hover .cta .arrow { transform: translateX(4px); }
+
+  .foot {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-soft);
+    font-size: 11px; line-height: 1.7;
+    color: var(--stone);
+    max-width: 640px;
+  }
+  .foot b { color: var(--ink); font-weight: 700; }
+
+  @media (max-width: 520px) {
+    .top { flex-direction: column; }
+    .mode-toggle { align-self: flex-start; }
+    .grid { grid-template-columns: 1fr; gap: 16px; }
+    .card .preview { aspect-ratio: 4/5; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <div class="kicker">Ounass · PLP Redesign</div>
+        <h1>Curated For You<br/>Reinvented</h1>
+        <p>Five takes on the Curated For You browse surface. Each pushes beyond the 2-up grid toward a distinct browsing model. Open any prototype on mobile to experience the full interaction.</p>
+      </div>
+      <div class="mode-toggle" id="modeToggle">
+        <button data-mode="dark" class="on">Dark</button>
+        <button data-mode="light">Light</button>
+      </div>
+    </header>
+
+    <main class="grid" id="grid"></main>
+
+    <footer class="foot">
+      <p><b>01 · Story Scroll</b> — Single-item-per-screen vertical swipe, with the "why it was curated" reason promoted into a visible chip. Treats browsing like flipping through a zine; reduces decision fatigue for the highest-intent curated surface.</p>
+      <p style="margin-top:8px;"><b>02 · Dense Discovery</b> — 3-up tight grid with inline quick-add, color swatches, and a sticky chip rail. ~50% more items visible per screen. Best when the goal is fast comparison and refinement.</p>
+      <p style="margin-top:8px;"><b>03 · Swipe Stack</b> — Curated cards surfaced one at a time. Swipe right saves, left passes, up opens details, down quick-adds. A Tinder-for-luxury model — ideal for the daily-edit moment.</p>
+      <p style="margin-top:8px;"><b>04 · Magazine</b> — Asymmetric hero + thumbs rhythm with an editorial quote strip between rows. Communicates luxury and curatorial voice while keeping density higher than the current 2-up.</p>
+      <p style="margin-top:8px;"><b>05 · Masonry</b> — Pinterest-style two-column staggered grid with varied tile heights. Minimal meta lets the image do the work — best for serendipitous discovery across many items.</p>
+    </footer>
+  </div>
+
+<script>
+const VARIANTS = [
+  {
+    num: '01', title: 'Story Scroll', href: '01-story-scroll.html',
+    desc: 'Full-bleed hero cards with the curation reason surfaced. Vertical snap-scroll, one piece per swipe.',
+    preview: 'story',
+  },
+  {
+    num: '02', title: 'Dense Discovery', href: '02-dense-discovery.html',
+    desc: '3-up tight grid with inline swatches and quick-add. See ~50% more per screen.',
+    preview: 'dense',
+  },
+  {
+    num: '03', title: 'Swipe Stack', href: '03-swipe-stack.html',
+    desc: 'Curated cards surfaced one at a time. Swipe right to save, left to pass, up for details.',
+    preview: 'swipe',
+  },
+  {
+    num: '04', title: 'Magazine', href: '04-magazine.html',
+    desc: 'Asymmetric hero + thumbs rhythm with an editorial quote strip between rows.',
+    preview: 'magazine',
+  },
+  {
+    num: '05', title: 'Masonry', href: '05-masonry.html',
+    desc: 'Pinterest-style two-column staggered grid. Minimal meta — the image does the work.',
+    preview: 'masonry',
+  },
+];
+
+// Lightweight preview SVGs — an abstract summary of each variant's layout.
+const PREVIEWS = {
+  story: `<svg viewBox="0 0 200 356" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="356" fill="var(--surface2)"/>
+    <rect x="14" y="20" width="172" height="3" rx="1.5" fill="var(--border)"/>
+    <rect x="14" y="20" width="86" height="3" rx="1.5" fill="var(--ink)"/>
+    <rect x="14" y="40" width="172" height="210" rx="6" fill="var(--surface)" stroke="var(--border-soft)"/>
+    <rect x="22" y="50" width="72" height="14" rx="7" fill="var(--ink)" opacity="0.85"/>
+    <rect x="25" y="55" width="4" height="4" fill="#C49373"/>
+    <rect x="32" y="56" width="58" height="2" fill="#F5F3EF"/>
+    <rect x="156" y="50" width="22" height="22" rx="11" fill="var(--surface2)" stroke="var(--border)"/>
+    <rect x="14" y="258" width="172" height="86" rx="6" fill="var(--surface)" stroke="var(--border-soft)"/>
+    <rect x="22" y="268" width="36" height="5" fill="#C49373"/>
+    <rect x="22" y="278" width="100" height="10" fill="var(--ink)" opacity="0.85"/>
+    <rect x="22" y="292" width="70" height="6" fill="var(--stone)" opacity="0.5"/>
+    <rect x="22" y="308" width="110" height="22" rx="3" fill="var(--ink)" opacity="0.9"/>
+    <rect x="140" y="308" width="22" height="22" rx="3" fill="var(--surface2)" stroke="var(--border)"/>
+  </svg>`,
+  dense: `<svg viewBox="0 0 200 356" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="356" fill="var(--surface2)"/>
+    <rect x="14" y="20" width="172" height="20" rx="3" fill="var(--surface)"/>
+    <rect x="20" y="27" width="40" height="6" rx="3" fill="var(--ink)" opacity="0.85"/>
+    <rect x="66" y="28" width="34" height="4" fill="var(--stone)" opacity="0.5"/>
+    <rect x="14" y="48" width="44" height="14" rx="7" fill="var(--ink)"/>
+    <rect x="64" y="48" width="52" height="14" rx="7" fill="transparent" stroke="var(--border)"/>
+    <rect x="122" y="48" width="40" height="14" rx="7" fill="transparent" stroke="var(--border)"/>
+    ${[0,1,2,3,4,5,6,7].map(i => {
+      const col = i % 3, row = Math.floor(i / 3);
+      const x = 14 + col * 58, y = 74 + row * 106;
+      return `<rect x="${x}" y="${y}" width="54" height="72" rx="3" fill="var(--surface)"/>
+              <rect x="${x+38}" y="${y+50}" width="14" height="14" rx="7" fill="var(--ink)"/>
+              <rect x="${x}" y="${y+78}" width="40" height="4" fill="var(--ink)" opacity="0.85"/>
+              <rect x="${x}" y="${y+86}" width="28" height="3" fill="var(--stone)" opacity="0.5"/>`;
+    }).join('')}
+  </svg>`,
+  swipe: `<svg viewBox="0 0 200 356" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="356" fill="var(--surface2)"/>
+    <rect x="40" y="28" width="120" height="220" rx="6" fill="var(--surface)" opacity="0.3"/>
+    <rect x="34" y="36" width="132" height="212" rx="6" fill="var(--surface)" opacity="0.6"/>
+    <rect x="26" y="44" width="148" height="204" rx="6" fill="var(--surface)" stroke="var(--border)" transform="rotate(-1.5 100 146)"/>
+    <rect x="36" y="58" width="60" height="12" rx="6" fill="var(--ink)" opacity="0.8"/>
+    <rect x="40" y="62" width="3" height="3" fill="#C49373"/>
+    <rect x="45" y="63" width="48" height="2" fill="#F5F3EF"/>
+    <rect x="152" y="56" width="14" height="14" rx="7" fill="var(--error)" opacity="0.2"/>
+    <rect x="36" y="180" width="48" height="4" fill="#C49373"/>
+    <rect x="36" y="188" width="100" height="8" fill="var(--ink)" opacity="0.85"/>
+    <rect x="36" y="202" width="60" height="5" fill="var(--stone)" opacity="0.5"/>
+    <circle cx="74" cy="286" r="16" fill="var(--surface)" stroke="var(--border)"/>
+    <circle cx="102" cy="288" r="20" fill="var(--ink)"/>
+    <circle cx="130" cy="286" r="16" fill="#C49373"/>
+    <rect x="48" y="324" width="20" height="4" fill="var(--stone)" opacity="0.5"/>
+    <rect x="88" y="324" width="24" height="4" fill="var(--stone)" opacity="0.5"/>
+    <rect x="132" y="324" width="20" height="4" fill="var(--stone)" opacity="0.5"/>
+  </svg>`,
+  magazine: `<svg viewBox="0 0 200 356" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="356" fill="var(--surface2)"/>
+    <rect x="14" y="20" width="172" height="20" rx="3" fill="var(--surface)"/>
+    <rect x="14" y="48" width="94" height="134" rx="3" fill="var(--surface)"/>
+    <rect x="18" y="54" width="34" height="8" rx="2" fill="var(--ink)" opacity="0.85"/>
+    <rect x="114" y="48" width="72" height="62" rx="3" fill="var(--surface)"/>
+    <rect x="114" y="118" width="72" height="64" rx="3" fill="var(--surface)"/>
+    <rect x="14" y="188" width="172" height="26" rx="3" fill="var(--surface)"/>
+    <rect x="22" y="196" width="10" height="10" fill="#C49373" opacity="0.7"/>
+    <rect x="40" y="199" width="110" height="4" fill="var(--ink)" opacity="0.8"/>
+    <rect x="40" y="207" width="70" height="3" fill="var(--stone)" opacity="0.5"/>
+    <rect x="14" y="222" width="68" height="102" rx="3" fill="var(--surface)"/>
+    <rect x="88" y="222" width="98" height="102" rx="3" fill="var(--surface)"/>
+  </svg>`,
+  masonry: `<svg viewBox="0 0 200 356" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="356" fill="var(--surface2)"/>
+    <rect x="14" y="20" width="172" height="20" rx="3" fill="var(--surface)"/>
+    <rect x="14" y="48" width="44" height="14" rx="7" fill="var(--ink)"/>
+    <rect x="64" y="48" width="40" height="14" rx="7" fill="transparent" stroke="var(--border)"/>
+    <rect x="108" y="48" width="44" height="14" rx="7" fill="transparent" stroke="var(--border)"/>
+    <rect x="14" y="74" width="84" height="82" rx="6" fill="var(--surface)"/>
+    <rect x="14" y="164" width="84" height="110" rx="6" fill="var(--surface)"/>
+    <rect x="14" y="282" width="84" height="54" rx="6" fill="var(--surface)"/>
+    <rect x="106" y="104" width="80" height="96" rx="6" fill="var(--surface)"/>
+    <rect x="106" y="208" width="80" height="68" rx="6" fill="var(--surface)"/>
+    <rect x="106" y="284" width="80" height="52" rx="6" fill="var(--surface)"/>
+    <rect x="18" y="78" width="32" height="10" rx="5" fill="var(--ink)" opacity="0.8"/>
+    <rect x="110" y="108" width="32" height="10" rx="5" fill="var(--ink)" opacity="0.8"/>
+  </svg>`,
+};
+
+const grid = document.getElementById('grid');
+VARIANTS.forEach(v => {
+  const a = document.createElement('a');
+  a.href = v.href;
+  a.className = 'card';
+  a.innerHTML = `
+    <div class="preview">${PREVIEWS[v.preview]}</div>
+    <div class="body">
+      <div class="num">Variation ${v.num}</div>
+      <h3>${v.title}</h3>
+      <p>${v.desc}</p>
+      <div class="cta">Open prototype <span class="arrow">→</span></div>
+    </div>`;
+  grid.appendChild(a);
+});
+
+// Mode toggle (persists)
+const saved = localStorage.getItem('plp-mode') || 'dark';
+if (saved === 'light') document.body.classList.add('light');
+document.querySelectorAll('#modeToggle button').forEach(btn => {
+  btn.classList.toggle('on', btn.dataset.mode === saved);
+  btn.addEventListener('click', () => {
+    const mode = btn.dataset.mode;
+    document.body.classList.toggle('light', mode === 'light');
+    document.querySelectorAll('#modeToggle button').forEach(b => b.classList.toggle('on', b === btn));
+    localStorage.setItem('plp-mode', mode);
+    document.querySelector('meta[name=theme-color]').setAttribute('content', mode === 'light' ? '#FAF8F4' : '#0F0F11');
+  });
+});
+</script>
+</body>
+</html>
