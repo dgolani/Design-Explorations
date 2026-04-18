@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#0F0F11">
+<meta name="theme-color" content="#FAF8F4">
 <title>Magazine — Curated For You</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -160,15 +160,14 @@
   .heart-btn {
     width: 32px; height: 32px; border-radius: 16px;
     display: flex; align-items: center; justify-content: center;
-    background: rgba(15,15,17,0.5);
+    background: rgba(255,255,255,0.82);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    color: var(--ink);
+    color: #1A1A1A;
     border: 0;
     cursor: pointer;
   }
-  body.light .heart-btn { background: rgba(255,255,255,0.8); color: #1A1A1A; }
-  .heart-btn.on { color: var(--accent); }
+  .heart-btn.on { color: #C8242B; }
   .heart-pos { position: absolute; top: 8px; right: 8px; }
   .color-count {
     position: absolute; bottom: 8px; left: 8px;
@@ -346,10 +345,10 @@
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
-<body>
+<body class="light">
 <div class="mode-toggle" id="modeToggle">
-  <button data-mode="dark" class="on">Dark</button>
-  <button data-mode="light">Light</button>
+  <button data-mode="dark">Dark</button>
+  <button data-mode="light" class="on">Light</button>
 </div>
 <div class="screen">
   <div class="status-bar">

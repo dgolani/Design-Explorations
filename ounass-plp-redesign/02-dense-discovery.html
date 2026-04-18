@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#0F0F11">
+<meta name="theme-color" content="#FAF8F4">
 <title>Dense Discovery — Curated For You</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -185,16 +185,15 @@
   .heart-sm {
     position: absolute; top: 4px; right: 4px;
     width: 26px; height: 26px; border-radius: 13px;
-    background: rgba(15,15,17,0.5);
+    background: rgba(255,255,255,0.85);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     display: flex; align-items: center; justify-content: center;
-    color: var(--ink);
+    color: #1A1A1A;
     border: 0;
     cursor: pointer;
   }
-  body.light .heart-sm { background: rgba(255,255,255,0.85); color: #1A1A1A; }
-  .heart-sm.on { color: var(--accent); }
+  .heart-sm.on { color: #C8242B; }
   .quick-add {
     position: absolute; bottom: 4px; right: 4px;
     width: 26px; height: 26px; border-radius: 13px;
@@ -328,10 +327,10 @@
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
-<body>
+<body class="light">
 <div class="mode-toggle" id="modeToggle">
-  <button data-mode="dark" class="on">Dark</button>
-  <button data-mode="light">Light</button>
+  <button data-mode="dark">Dark</button>
+  <button data-mode="light" class="on">Light</button>
 </div>
 <div class="screen">
   <div class="status-bar">

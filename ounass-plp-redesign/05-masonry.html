@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#0F0F11">
+<meta name="theme-color" content="#FAF8F4">
 <title>Masonry · Curated For You</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -154,14 +154,13 @@
   .heart-sm {
     position: absolute; top: 6px; right: 6px;
     width: 30px; height: 30px; border-radius: 15px;
-    background: rgba(15,15,17,0.55);
+    background: rgba(255,255,255,0.9);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     display: flex; align-items: center; justify-content: center;
-    color: var(--ink); border: 0; cursor: pointer;
+    color: #1A1A1A; border: 0; cursor: pointer;
   }
-  body.light .heart-sm { background: rgba(255,255,255,0.9); color: #1A1A1A; }
-  .heart-sm.on { color: var(--accent); }
+  .heart-sm.on { color: #C8242B; }
   .reason {
     position: absolute; bottom: 8px; left: 8px; right: 8px;
     background: rgba(15,15,17,0.78);
@@ -273,10 +272,10 @@
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
-<body>
+<body class="light">
 <div class="mode-toggle" id="modeToggle">
-  <button data-mode="dark" class="on">Dark</button>
-  <button data-mode="light">Light</button>
+  <button data-mode="dark">Dark</button>
+  <button data-mode="light" class="on">Light</button>
 </div>
 <div class="screen">
   <div class="status-bar">
